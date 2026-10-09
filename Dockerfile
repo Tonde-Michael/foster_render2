@@ -21,4 +21,11 @@ COPY . .
 RUN python manage.py collectstatic --no-input
 
 # Run migrations, then start gunicorn
-CMD python manage.py migrate && gunicorn core.wsgi:application --bind 0.0.0.0:$PORT
+# Copy the project
+COPY . .
+
+# Collect static files
+RUN python manage.py collectstatic --no-input
+
+# Start the Django application
+CMD ["sh", "-c", "gunicorn core.wsgi:application --bind 0.0.0.0:${PORT:-10000}"]
