@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Collect static files at build time
-RUN python manage.py collectstatic --no-input
+RUN SECRET_KEY=build-placeholder python manage.py collectstatic --no-input
 
 # Run migrations, then start gunicorn
 # Copy the project
