@@ -25,7 +25,7 @@ RUN SECRET_KEY=build-placeholder python manage.py collectstatic --no-input
 COPY . .
 
 # Collect static files
-RUN python manage.py collectstatic --no-input
+RUN SECRET_KEY=build-placeholder python manage.py collectstatic --no-input
 
 # Start the Django application
 CMD ["sh", "-c", "gunicorn core.wsgi:application --bind 0.0.0.0:${PORT:-10000}"]
